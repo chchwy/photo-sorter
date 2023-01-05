@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "photo-sorter", "photo-sorter\photo-sorter.vcxproj", "{F5BE9F2F-8C1E-45D1-9828-7AADB95F5FEC}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tests", "tests\tests.vcxproj", "{0F329E3F-4825-474F-9B17-1E7B3069C373}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5BE9F2F-8C1E-45D1-9828-7AADB95F5FEC}.Debug|x64.ActiveCfg = Debug|x64
+		{F5BE9F2F-8C1E-45D1-9828-7AADB95F5FEC}.Debug|x64.Build.0 = Debug|x64
+		{F5BE9F2F-8C1E-45D1-9828-7AADB95F5FEC}.Release|x64.ActiveCfg = Release|x64
+		{F5BE9F2F-8C1E-45D1-9828-7AADB95F5FEC}.Release|x64.Build.0 = Release|x64
+		{0F329E3F-4825-474F-9B17-1E7B3069C373}.Debug|x64.ActiveCfg = Debug|x64
+		{0F329E3F-4825-474F-9B17-1E7B3069C373}.Debug|x64.Build.0 = Debug|x64
+		{0F329E3F-4825-474F-9B17-1E7B3069C373}.Release|x64.ActiveCfg = Release|x64
+		{0F329E3F-4825-474F-9B17-1E7B3069C373}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A83CA680-E7F7-4555-BA56-2302589E7821}
+	EndGlobalSection
+EndGlobal
