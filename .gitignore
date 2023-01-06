@@ -3,3 +3,4 @@
 /photo-sorter/x64
 /tests/x64
 *.vcxproj.user
+/packages
