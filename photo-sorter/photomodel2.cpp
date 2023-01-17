@@ -29,6 +29,39 @@ bool isIMGTypical(const QFileInfo& fileInfo)
 	return match.hasMatch();
 }
 
+bool isIMG_HDR(const QFileInfo& fileInfo)
+{
+	const QString fileName = fileInfo.fileName();
+	QRegularExpression re("^IMG_[0-9]{8}_[0-9]{6}_HDR.jpg$");
+	auto match = re.match(fileName);
+	return match.hasMatch();
+}
+
+bool isPXLVideo(const QFileInfo& fileInfo)
+{
+	const QString fileName = fileInfo.fileName();
+	QRegularExpression re("^PXL_[0-9]{8}_[0-9]{9}.mp4$");
+	auto match = re.match(fileName);
+	return match.hasMatch();
+}
+
+bool isVIDVideo(const QFileInfo& fileInfo)
+{
+	//^VID_[0-9]{8}_[0-9]{6}.mp4$
+	const QString fileName = fileInfo.fileName();
+	QRegularExpression re("^VID_[0-9]{8}_[0-9]{6}.mp4$");
+	auto match = re.match(fileName);
+	return match.hasMatch();
+}
+
+bool isIMAG0000(const QFileInfo& fileInfo)
+{
+	const QString fileName = fileInfo.fileName();
+	QRegularExpression re("^IMAG[0-9]{4}.jpg$");
+	auto match = re.match(fileName);
+	return match.hasMatch();
+}
+
 PhotoModel::PhotoModel()
 {
 }

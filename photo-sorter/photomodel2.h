@@ -34,3 +34,7 @@ public:
 
 bool isPXLTypical(const QFileInfo& fileInfo);
 bool isIMGTypical(const QFileInfo& fileInfo);
+bool isIMG_HDR(const QFileInfo&);
+bool isPXLVideo(const QFileInfo& fileInfo);
+bool isVIDVideo(const QFileInfo& fileInfo);
+bool isIMAG0000(const QFileInfo&);

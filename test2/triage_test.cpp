@@ -3,13 +3,6 @@
 #include <QDebug>
 #include "photomodel2.h"
 
-#define ROOT_DIR "D:\\Backups"
-
-enum IMG_FILE_INDEX
-{
-	IMG_PXL = 0,
-	//IMG_
-};
 
 class TriagePath : public ::testing::Test
 {
@@ -66,71 +59,62 @@ TEST(Triage, CheckPXLFolder)
 
 TEST(Triage, CheckIMGFolder)
 {
-	QDirIterator di("C:\\photos\\IMG_JPG", QDir::Files, QDirIterator::Subdirectories);
+	QDirIterator di("C:\\photos\\IMG_JPG", QDir::Files);
 	int count = 0;
 	while (di.hasNext())
 	{
+		QString s = di.next();
 		QFileInfo info = di.fileInfo();
-		di.next();
 
 		bool ok = isIMGTypical(info);
 		EXPECT_TRUE(ok);
 		if (!ok)
-			qDebug() << info.fileName();
+			qDebug() << "Fail:" << s << info.absoluteFilePath();
 		count++;
 	}
 	qDebug() << count;
 }
 
-TEST(Triage, DISABLED_movefile)
+#define ROOT_DIR "C:\\photos\\Backups"
+TEST(Triage, movefile)
 {
 	QDirIterator di(ROOT_DIR, QDir::Files, QDirIterator::Subdirectories);
 
-	QDir dest("D:\\Output");
+	QDir dest("C:\\photos\\IMG_JPG");
+	QDir check("C:\\photos\\Check");
 
 	int pxlCount = 0;
 	int totalCount = 0;
 	while (di.hasNext())
 	{
-		QString s = di.next();
-
-		QFileInfo info = di.fileInfo();
+		const QString s = di.next();
+		const QFileInfo info = di.fileInfo();
 
 		QString f = info.fileName();
-		//"PXL_20220103_202455910";
-		//IMG_20190810_141710
-		if (f.startsWith("IMG") && info.suffix() == "jpg")
+		if (isIMGTypical(f))
 		{
 			QString baseName = info.completeBaseName();
-			QStringList tokens = baseName.split(QChar('_'));
+			//QStringList tokens = baseName.split(QChar('_'));
+			pxlCount++;
 
-			//EXPECT_EQ(tokens.length(), 3);
-			//EXPECT_STREQ(qPrintable(tokens[0]), "PXL");
-			//EXPECT_EQ(tokens[1].length(), sizeof("20220103") - 1);
-			//EXPECT_EQ(tokens[2].length(), sizeof("202455910") - 1);
+			bool ok = true;
+			ok = QFile::rename(s, dest.filePath(f));
+			EXPECT_TRUE(ok);
 
-			//bool yes = true;
-			constexpr const char* timeSam = "141710";
-			constexpr std::string_view sv(timeSam);
-			constexpr int timeLen = sv.size();
-
-			qDebug() << timeLen << tokens[2];
-			if ((tokens.length() == 3)
-				&& (tokens[0] == "IMG")
-				&& (tokens[1].length() == sizeof("20220103") - 1)
-				&& (tokens[2].length() == timeLen))
+			if (!ok)
 			{
-				pxlCount++;
+				qDebug() << s;
+				qDebug() << dest.filePath(f);
 
-				//qDebug() << s << token;
-				bool ok = QFile::rename(s, dest.filePath(f));
+				ok = QFile::rename(s, check.filePath(f));
 				EXPECT_TRUE(ok);
-				if (pxlCount % 1000 == 0)
-					qDebug() << pxlCount;
 			}
+
+			if (pxlCount % 100 == 0)
+				qDebug() << pxlCount;
 		}
 	}
 
 	qDebug() << "PXL Count=" << pxlCount;
-	qDebug() << "Total Count=" << totalCount;
+	//qDebug() << "Total Count=" << totalCount;
 }
