@@ -1,17 +1,21 @@
 #pragma once
-#include <vector>
+#include<vector>
+#include<cstdint>
+#include<QString>
+
+class QFileInfo;
 
 struct FileEntry
 {
-	qint64 size = 0;
-	qint64 timestamp = 0;
+	int64_t size = 0;
+	int64_t timestamp = 0;
 	QString path;
 };
 
 struct FileSizeBucket
 {
-	qint64 min;
-	qint64 max;
+	int64_t min;
+	int64_t max;
 
 	bool inRange(int fileSize);
 
@@ -25,7 +29,8 @@ public:
 	PhotoModel();
 
 	void scan();
-
 	std::vector<FileEntry> m_fileEntries;
 };
 
+bool isPXLTypical(const QFileInfo& fileInfo);
+bool isIMGTypical(const QFileInfo& fileInfo);

@@ -1,11 +1,32 @@
-#include "stdafx.h"
 #include "photomodel2.h"
 #include <QDirIterator>
 #include <QFileInfo>
+#include <QDateTime>
+#include <QDebug>
+#include <QRegularExpression>
 
 bool cmpFileSize(const FileEntry& a, const FileEntry& b)
 {
 	return a.size < b.size;
+}
+
+bool isPXLTypical(const QFileInfo& fileInfo)
+{
+	// PXL_20220103_202455910.jpg
+	
+	const QString fileName = fileInfo.fileName();
+	QRegularExpression re("^PXL_[0-9]{8}_[0-9]{9}.jpg$");
+	auto match = re.match(fileName);
+
+	return match.hasMatch();
+}
+
+bool isIMGTypical(const QFileInfo& fileInfo)
+{
+	const QString fileName = fileInfo.fileName();
+	QRegularExpression re("^IMG_[0-9]{8}_[0-9]{6}.jpg$");
+	auto match = re.match(fileName);
+	return match.hasMatch();
 }
 
 PhotoModel::PhotoModel()

@@ -1,6 +1,7 @@
 /.vs
 /x64
 /photo-sorter/x64
-/tests/x64
+/test2/x64
 *.vcxproj.user
 /packages
+/JSON/Schemas/Catalog
